@@ -1,0 +1,68 @@
+import deportes.*
+import frutas.*
+import personas.*
+import equipo.*
+
+describe "deportes" {
+	test "voley energiaQueResta manzana" {
+		juana.comprar(manzana)
+		assert.equals(5, voley.energiaQueResta(juana))
+	}
+	
+	test "voley energiaQueResta mandarina" {
+		juana.comprar(mandarina)
+		assert.equals(8, voley.energiaQueResta(juana))
+	}
+	
+	test "voley energiaQueResta banana" {
+		juana.comprar(banana)
+		assert.equals(12, voley.energiaQueResta(juana))
+	}
+	
+	test "voley - es jugado por martin "{
+		assert.doesNotThrowException({voley.esJugadoPor(martin)})
+	}
+	
+	test "voley - es jugado por juana "{
+		assert.doesNotThrowException({voley.esJugadoPor(juana)})
+	}
+	
+	test "voley - es jugado por pepe "{
+		assert.doesNotThrowException({voley.esJugadoPor(pepe)})
+	}
+	
+	test "futbol energiaQueResta - Persona con baja energia" {
+		assert.equals(4, futbol.energiaQueResta(pepe))
+	}
+	
+	test "futbol energiaQueResta - Persona sin baja energia" {
+		assert.equals(10, futbol.energiaQueResta(martin))
+	}
+
+	test "futbol - es jugado por martin "{
+		assert.doesNotThrowException({futbol.esJugadoPor(martin)})
+	}
+	
+	test "futbol - es jugado por juana "{
+		assert.doesNotThrowException({futbol.esJugadoPor(juana)})
+	}
+	
+	test "futbol - es jugado por pepe "{
+		assert.doesNotThrowException({futbol.esJugadoPor(pepe)})
+	}
+	test "basquet energiaQueResta -" {
+		assert.equals(3, basquet.energiaQueResta(pepe))
+	}
+	
+	test "basquet - es jugado por martin "{
+		assert.doesNotThrowException({basquet.esJugadoPor(martin)})
+	}
+	
+	test "basquet - es jugado por juana "{
+		assert.doesNotThrowException({basquet.esJugadoPor(juana)})
+	}
+	
+	test "basquet - es jugado por pepe "{
+		assert.doesNotThrowException({basquet.esJugadoPor(pepe)})
+	}
+}

@@ -1,0 +1,246 @@
+import deportes.*
+import frutas.*
+import personas.*
+describe "Test de las personas" {
+
+	test "Martin - energia" {
+		assert.equals(15, martin.energia())
+	}
+
+	test "Martin - edad" {
+		assert.equals(14, martin.edad())
+	}
+	
+	test "Martin - es adulto " {
+		assert.notThat(martin.esAdulto())
+	}
+	
+	test "Martin - no tiene energia baja" {
+		assert.notThat(martin.tieneBajaEnergia())
+	}
+
+	test "Martin - Tiene energia baja" {
+		martin.hacerDeporte(futbol)
+		assert.that(martin.tieneBajaEnergia())
+	}
+	
+	test "Martin - no es feliz" {
+		assert.notThat(martin.esFeliz())
+	}
+	
+	test "Martin - es feliz" {
+		martin.hacerDeporte(basquet)
+		martin.comprar(manzana)
+		martin.hacerDeporte(voley)
+		manzana.madurar()
+		assert.that(martin.esFeliz())
+	}
+	test "Martin - hacer deporte Voley compra manazana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		martin.comprar(manzana)
+		martin.hacerDeporte(voley)
+		assert.equals(10, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+
+	test "Martin - hacer deporte Voley compra mandariana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		martin.comprar(mandarina)
+		martin.hacerDeporte(voley)
+		assert.equals(7, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+
+	test "Martin - hacer deporte Voley compra banana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		martin.comprar(banana)
+		martin.hacerDeporte(voley)
+		assert.equals(3, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+	
+	test "Martin - hacer deporte Voley sin haber comprado Fruta" {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		martin.hacerDeporte(voley)
+		assert.equals(15, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+
+	
+	test "Martin - hacer deporte futbol y la persona no tiene baja energia " {
+		assert.notThat(martin.tieneBajaEnergia())
+		martin.hacerDeporte(futbol)
+		assert.equals(5, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+
+	test "Martin - hacer deporte futbol y la persona tiene baja energia " {
+		martin.restarEnergia(10)
+		assert.that(martin.tieneBajaEnergia())
+		martin.hacerDeporte(futbol)
+		assert.equals(1, martin.energia())
+		assert.equals(1, martin.cantidadDeVecesRealizoDeporte())
+	}
+	
+	test "Martin - hacer deporte basquet" {
+		martin.hacerDeporte(basquet)
+		assert.equals(12, martin.energia())
+	}
+	
+	test "Martin - no es deportista" {
+		martin.hacerDeporte(basquet)
+		assert.notThat(martin.esDeportista())
+	}
+	test "Martin - es deportista" {
+		martin.hacerDeporte(basquet)
+		martin.comprar(manzana)
+		martin.hacerDeporte(voley)
+		manzana.madurar()
+		martin.comerFruta()
+		assert.that(martin.esDeportista())
+	}	
+	
+	test "Juana - energia" {
+		assert.equals(45, juana.energia())
+	}
+	
+	test "Juana - no tiene energia baja" {
+		assert.notThat(juana.tieneBajaEnergia())
+	}
+	
+	test "Juana - tiene energia baja" {
+		juana.hacerDeporte(futbol)
+		juana.hacerDeporte(futbol)
+		juana.hacerDeporte(futbol)
+		assert.equals(15, juana.energia())
+		assert.that(juana.tieneBajaEnergia())
+	}
+	
+	test "Juana - no es feliz" {
+		assert.notThat(juana.esFeliz())
+	}
+	
+	test "Juana - es feliz" {
+		juana.hacerDeporte(futbol)
+		juana.hacerDeporte(futbol)
+		assert.that(juana.esFeliz())
+	}
+	
+	test "Juana - hacer deporte Voley comprar manzana" {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		juana.comprar(manzana)
+		juana.hacerDeporte(voley)
+		assert.equals(40, juana.energia())
+	}
+	
+	test "Juana - hacer deporte Voley compra mandariana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		juana.comprar(mandarina)
+		juana.hacerDeporte(voley)
+		assert.equals(37, juana.energia())
+	}	
+	
+	test "Juana - hacer deporte Voley compra banana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		juana.comprar(banana)
+		juana.hacerDeporte(voley)
+		assert.equals(33, juana.energia())
+	}
+	
+	test "Juana - hacer deporte futbol y la persona no tiene baja energia " {
+		assert.notThat(juana.tieneBajaEnergia())
+		juana.hacerDeporte(futbol)
+		assert.equals(35, juana.energia())
+	}
+	
+	test "Juana - hacer deporte futbol y la persona tiene baja energia " {
+		juana.restarEnergia(21)
+		assert.that(juana.tieneBajaEnergia())
+		juana.hacerDeporte(futbol)
+		assert.equals(20, juana.energia())
+	}
+	
+	test "Juana - hacer deporte basquet" {
+		juana.hacerDeporte(basquet)
+		assert.equals(42, juana.energia())
+	}
+	
+	test "Juana - no es deportista" {
+		assert.notThat(juana.esFeliz())
+		assert.notThat(juana.esDeportista())
+	}
+	
+	test "Juana - es deportista" {
+		juana.hacerDeporte(futbol)
+		juana.hacerDeporte(basquet)
+	
+		assert.that(juana.esFeliz())
+		assert.notThat(juana.tieneBajaEnergia())
+		assert.that(juana.esDeportista())
+	}
+
+	test "pepe - energia" {
+		assert.equals(25, pepe.energia())
+	}
+	
+	test "pepe - tiene energia baja" {
+		assert.that(pepe.tieneBajaEnergia())
+	}
+	
+	test "pepe - no es feliz" {
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		assert.notThat(pepe.esFeliz())
+	}
+	
+	test "pepe - es feliz" {
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		pepe.hacerDeporte(basquet)
+		assert.that(pepe.esFeliz())
+	}
+	
+	test "pepe - hacer deporte Voley compra manazana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		pepe.comprar(manzana)
+		pepe.hacerDeporte(voley)
+		assert.equals(20, pepe.energia())
+	}
+
+	test "pepe - hacer deporte Voley compra mandariana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		pepe.comprar(mandarina)
+		pepe.hacerDeporte(voley)
+		assert.equals(17, pepe.energia())
+	}	
+	
+	test "pepe - hacer deporte Voley compra banana " {
+		/*La cantidad de energia que resta depende de la ultima fruta comprada */
+		pepe.comprar(banana)
+		pepe.hacerDeporte(voley)
+		assert.equals(13, pepe.energia())
+	}
+
+	test "pepe - hacer deporte futbol y la persona tiene baja energia " {
+		assert.that(pepe.tieneBajaEnergia())
+		pepe.hacerDeporte(futbol)
+		assert.equals(21, pepe.energia())
+	}
+		
+	test "pepe - hacer deporte basquet" {
+		pepe.hacerDeporte(basquet)
+		assert.equals(22, pepe.energia())
+	}
+	
+	test "pepe - es deportista" {
+		assert.that(pepe.esDeportista())
+	}
+}
+
+

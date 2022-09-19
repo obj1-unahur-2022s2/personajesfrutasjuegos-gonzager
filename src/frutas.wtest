@@ -1,0 +1,156 @@
+import frutas.*
+import personas.*
+import deportes.*
+describe "test de las frutas"{
+	
+	test "Mnzn - peso"{
+		assert.equals(150, manzana.peso())
+	}
+	
+	test "Mnzn - color"{
+		assert.equals(verde, manzana.color())
+	}
+	
+	test "Mnzn - esGrande"{
+		assert.that(manzana.esGrande())
+	}	
+	
+	test "Mnzn - madurar"{
+		manzana.madurar()
+		assert.that(manzana.esDeColor(rojo))
+	}	
+	
+	test "Mnzn - energiaQueProvee - Sin Madurar"{
+		assert.equals(5, manzana.energiaQueProvee())
+	}
+	
+	test "Mnzn - energiaQueProvee - Luego de madurar"{
+		manzana.madurar()
+		assert.equals(14, manzana.energiaQueProvee())
+	}
+	
+	test "Mnzn - energiaQueResta" {
+		assert.equals(5, manzana.energiaQueResta())
+	}
+	
+	test "Mnzn - no le Gusta a una persona"{
+		assert.notThat(manzana.leGusta(martin))
+	}
+	
+	test "Mnzn - le Gusta a una persona"{
+		manzana.madurar()
+		assert.that(manzana.leGusta(martin))
+	}
+	
+	test "Mndrn - peso" {
+		assert.equals(60, mandarina.peso())
+	}
+	
+	test "Mndrn - color" {
+		assert.equals(naranja, mandarina.color())
+	}
+	
+	test "Mndrn - esGrande" {
+		assert.notThat(mandarina.esGrande())
+	}
+	
+	test "Mndrn - madurar"{
+		mandarina.madurar()
+		assert.equals(84, mandarina.peso())
+	}
+	
+	test "Mndrn - energiaQueProvee - Sin Madurar"{
+		assert.equals(3, mandarina.energiaQueProvee())
+	}
+	
+	test "Mndrn - energiaQueProvee - Luego de Madurar"{
+		mandarina.madurar()
+		assert.equals(10, mandarina.energiaQueProvee())
+	}
+	
+	test "Mndrn - energiaQueResta" {
+		assert.equals(8, mandarina.energiaQueResta())
+	}
+
+	test "Mndrn - no le Gusta a una persona "{
+		assert.notThat(mandarina.leGusta(martin))
+	}
+	
+	test "Mndrn - le Gusta a una persona "{
+		mandarina.madurar()
+		assert.that(mandarina.leGusta(martin))
+	}
+	
+	test "Bnn - peso"{
+		/* Se toma como que la banana pesa 0 por no estar en el enunciado */
+		assert.equals(0, banana.peso())
+	}
+	
+	test "Bnn - color" {
+		assert.equals(amarillo, banana.color())
+	}
+	
+	test "Bnn - esGrande" {
+		assert.notThat(banana.esGrande())
+	}
+	
+	test "Bnn - Manduar" {
+		assert.doesNotThrowException({banana.madurar()})
+	}
+
+	test "Bnn - energiaQueProvee - Sin Madurar"{
+		assert.equals(5, banana.energiaQueProvee())
+	}
+	
+	test "Bnn - energiaQueProvee - Luego de Madurar"{
+		banana.madurar()
+		assert.equals(5, banana.energiaQueProvee())
+	}
+	
+	test "Bnn - no le Gusta a una persona "{
+		/* No le gusta cuando la persona esta feliz */
+		martin.hacerDeporte(basquet)
+		martin.hacerDeporte(basquet)
+		assert.that(martin.esFeliz())
+		assert.notThat(banana.leGusta(martin))
+	}
+	
+	test "Bn - le Gusta a una persona "{
+		/* Le gusta cuando la persona no esta feliz */
+		assert.notThat(martin.esFeliz())
+		assert.that(banana.leGusta(martin))
+	}
+	
+	test "null - peso"{
+		assert.equals(0, nullFruta.peso())
+	}
+	
+	test "null - color"{
+		assert.equals(nullColor, nullFruta.color())
+	}
+	
+	test "null - esGrande"{
+		assert.notThat(nullFruta.esGrande())
+	}	
+	
+	test "null - madurar"{
+		assert.doesNotThrowException({nullFruta.madurar()})
+	}	
+	
+	test "null - energiaQueProvee - Sin Madurar"{
+		assert.equals(0, nullFruta.energiaQueProvee())
+	}
+	
+	test "null - energiaQueProvee - Luego de madurar"{
+		nullFruta.madurar()
+		assert.equals(0, nullFruta.energiaQueProvee())
+	}
+	
+	test "null - energiaQueResta" {
+		assert.equals(0, nullFruta.energiaQueResta())
+	}
+	
+	test "null - no le Gusta a una persona"{
+		assert.doesNotThrowException({nullFruta.leGusta(martin)})
+	}
+}

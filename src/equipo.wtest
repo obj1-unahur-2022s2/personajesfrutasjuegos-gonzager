@@ -1,0 +1,49 @@
+import personas.*
+import frutas.*
+import deportes.*
+import equipo.*
+describe "Test de Equipo" {
+	
+	test "asignarJugadores" {
+		equipo.asignarJugadores(pepe, juana, martin)
+		assert.equals(pepe,equipo.delanteroIzquierdo())
+		assert.equals(juana,equipo.delanteroDerecho())
+		assert.equals(martin, equipo.defensor())
+	}
+	
+	test "rotarposiciones" {
+		equipo.asignarJugadores(pepe, juana, martin)
+		equipo.rotarPosiciones()
+		assert.equals(martin,equipo.delanteroIzquierdo())
+		assert.equals(pepe,equipo.delanteroDerecho())
+		assert.equals(juana, equipo.defensor())
+	}
+	
+	test "jugadorConMasEnergiaConColecciones" {
+		equipo.asignarJugadores(pepe, juana, martin)
+		assert.equals(juana, equipo.jugadorConMasEnergiaConColecciones())
+	}
+	
+	test "jugadorConMasEnergia" {
+		equipo.asignarJugadores(pepe, juana, martin)
+		assert.equals(juana, equipo.jugadorConMasEnergia())
+	}
+	
+	test "no esEquipoDeportista" {
+		equipo.asignarJugadores(pepe, juana, martin)
+		assert.notThat(equipo.esEquipoDeportista())
+	}
+	
+	test "esEquipoDeportista" {
+		martin.hacerDeporte(basquet)
+		martin.comprar(manzana)
+		martin.hacerDeporte(voley)
+		manzana.madurar()
+		martin.comerFruta()
+		juana.hacerDeporte(futbol)
+		juana.hacerDeporte(basquet)
+		equipo.asignarJugadores(pepe, juana, martin)
+		assert.that(equipo.esEquipoDeportista())
+	}
+	
+}
